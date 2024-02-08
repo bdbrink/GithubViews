@@ -1,6 +1,6 @@
 // src/App.js
-
 import React, { useState } from 'react';
+import { AppContainer } from './StyledComponents';
 import RepoSearch from './RepoSearch';
 import RepoList from './RepoList';
 
@@ -18,11 +18,11 @@ const App = () => {
   };
 
   return (
-    <div>
+    <AppContainer>
       <h1>GitHub Repository Analyzer</h1>
       <RepoSearch onSearch={handleSearch} />
       <RepoList repos={repos} />
-    </div>
+    </AppContainer>
   );
 };
 
