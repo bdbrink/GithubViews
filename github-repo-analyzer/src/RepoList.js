@@ -1,10 +1,10 @@
 // src/RepoList.js
-
 import React from 'react';
+import { RepoListContainer } from './StyledComponents';
 
 const RepoList = ({ repos }) => {
   return (
-    <div>
+    <RepoListContainer>
       <h2>Repositories:</h2>
       <ul>
         {repos.map((repo) => (
@@ -15,7 +15,7 @@ const RepoList = ({ repos }) => {
           </li>
         ))}
       </ul>
-    </div>
+    </RepoListContainer>
   );
 };
 
