@@ -1,6 +1,6 @@
 // src/RepoSearch.js
-
 import React, { useState } from 'react';
+import { SearchContainer, Input, Button } from './StyledComponents';
 
 const RepoSearch = ({ onSearch }) => {
   const [query, setQuery] = useState('');
@@ -10,15 +10,15 @@ const RepoSearch = ({ onSearch }) => {
   };
 
   return (
-    <div>
-      <input
+    <SearchContainer>
+      <Input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Enter GitHub username"
       />
-      <button onClick={handleSearch}>Search Repositories</button>
-    </div>
+      <Button onClick={handleSearch}>Search Repositories</Button>
+    </SearchContainer>
   );
 };
 
