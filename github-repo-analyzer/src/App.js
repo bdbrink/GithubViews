@@ -20,7 +20,11 @@ const App = () => {
       }
 
       const data = await response.json();
-      setRepos(data);
+
+      // Sort repositories by last updated date in descending order
+      const sortedRepos = data.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+
+      setRepos(sortedRepos);
     } catch (error) {
       setError(error.message);
     } finally {
@@ -37,8 +41,4 @@ const App = () => {
       {error && <ErrorMessage>{error}</ErrorMessage>}
       
       {!loading && !error && <RepoList repos={repos} />}
-    </AppContainer>
-  );
-};
-
-export default App;
+    </AppC
