@@ -1,5 +1,5 @@
 // src/StyledComponents.js
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const AppContainer = styled.div`
   max-width: 800px;
@@ -38,7 +38,7 @@ export const RepoListContainer = styled.div`
     padding: 0;
 
     li {
-      margin-bottom: 5px;
+      margin-bottom: 20px;
 
       a {
         text-decoration: none;
@@ -49,6 +49,43 @@ export const RepoListContainer = styled.div`
           text-decoration: underline;
         }
       }
+
+      p {
+        margin-top: 5px;
+        color: #586069;
+      }
     }
   }
 `;
+
+export const LoadingIndicator = styled.div`
+  margin: 20px 0;
+  font-size: 16px;
+  color: #0366d6;
+`;
+
+export const ErrorMessage = styled.div`
+  margin: 20px 0;
+  font-size: 16px;
+  color: #d73a49;
+`;
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+export const Spinner = styled.div`
+  display: inline-block;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #0366d6;
+  width: 20px;
+  height: 20px;
+  animation: ${rotate} 1s linear infinite;
+`;
+
