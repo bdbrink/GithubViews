@@ -5,6 +5,7 @@ import RepoSearch from './RepoSearch';
 import RepoList from './RepoList';
 
 const App = () => {
+  const [userProfile, setUserProfile] = useState(null);
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -14,17 +15,21 @@ const App = () => {
       setLoading(true);
       setError(null);
 
-      const response = await fetch(`https://api.github.com/users/${username}/repos`);
-      if (!response.ok) {
+      // Fetch user profile
+      const userResponse = await fetch(`https://api.github.com/users/${username}`);
+      if (!userResponse.ok) {
+        throw new Error('Failed to fetch user profile');
+      }
+      const userData = await userResponse.json();
+      setUserProfile(userData);
+
+      // Fetch user repositories
+      const reposResponse = await fetch(`https://api.github.com/users/${username}/repos`);
+      if (!reposResponse.ok) {
         throw new Error('Failed to fetch repositories');
       }
-
-      const data = await response.json();
-
-      // Sort repositories by last updated date in descending order
-      const sortedRepos = data.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
-
-      setRepos(sortedRepos);
+      const reposData = await reposResponse.json();
+      setRepos(reposData);
     } catch (error) {
       setError(error.message);
     } finally {
@@ -36,9 +41,18 @@ const App = () => {
     <AppContainer>
       <h1>GitHub Repository Analyzer</h1>
       <RepoSearch onSearch={handleSearch} />
-      
+
       {loading && <LoadingIndicator>Loading...</LoadingIndicator>}
       {error && <ErrorMessage>{error}</ErrorMessage>}
-      
-      {!loading && !error && <RepoList repos={repos} />}
-    </AppC
+
+      {!loading && !error && userProfile && (
+        <>
+          <div>
+            <img
+              src={userProfile.avatar_url}
+              alt={`${userProfile.login}'s avatar`}
+              style={{ borderRadius: '50%', width: '100px', height: '100px' }}
+            />
+            <h2>{userProfile.name}</h2>
+            <p>{userProfile.bio}</p>
+ 
