@@ -89,3 +89,23 @@ export const Spinner = styled.div`
   animation: ${rotate} 1s linear infinite;
 `;
 
+export const UserProfileContainer = styled.div`
+  margin-top: 20px;
+  text-align: center;
+
+  img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    margin-bottom: 5px;
+  }
+
+  p {
+    color: #586069;
+    margin-bottom: 5px;
+  }
+`;
