@@ -55,4 +55,14 @@ const App = () => {
             />
             <h2>{userProfile.name}</h2>
             <p>{userProfile.bio}</p>
- 
+            <p>Followers: {userProfile.followers}</p>
+            <p>Following: {userProfile.following}</p>
+          </div>
+          <RepoList repos={repos} />
+        </>
+      )}
+    </AppContainer>
+  );
+};
+
+export default App;
