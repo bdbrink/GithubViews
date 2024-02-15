@@ -1,13 +1,15 @@
 // src/StyledComponents.js
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from "styled-components";
 
 export const AppContainer = styled.div`
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
   text-align: center;
+  background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.text};
+  transition: background-color 0.3s, color 0.3s;
 `;
-
 export const SearchContainer = styled.div`
   margin-bottom: 20px;
 `;
@@ -108,4 +110,25 @@ export const UserProfileContainer = styled.div`
     color: #586069;
     margin-bottom: 5px;
   }
+`;
+
+export const lightTheme = {
+  background: "#fff",
+  text: "#000",
+  accent: "#0366d6",
+};
+
+export const darkTheme = {
+  background: "#1a1a1a",
+  text: "#fff",
+  accent: "#61dafb",
+};
+
+export const ToggleButton = styled.button`
+  background-color: ${({ theme }) => theme.accent};
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  margin-bottom: 20px;
 `;
