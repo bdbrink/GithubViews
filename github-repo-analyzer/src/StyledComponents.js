@@ -132,3 +132,24 @@ export const ToggleButton = styled.button`
   cursor: pointer;
   margin-bottom: 20px;
 `;
+
+export const LanguageStats = styled.div`
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f6f8fa;
+  border-radius: 5px;
+
+  p {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin-bottom: 3px;
+    }
+  }
+`;
