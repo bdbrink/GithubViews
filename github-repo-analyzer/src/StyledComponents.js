@@ -1,5 +1,5 @@
 // src/StyledComponents.js
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from 'styled-components';
 
 export const AppContainer = styled.div`
   max-width: 800px;
@@ -113,16 +113,16 @@ export const UserProfileContainer = styled.div`
 `;
 
 export const lightTheme = {
-  background: "#fff",
-  text: "#000",
-  accent: "#0366d6",
-};
-
-export const darkTheme = {
-  background: "#1a1a1a",
-  text: "#fff",
-  accent: "#61dafb",
-};
+    background: '#fff',
+    text: '#000',
+    accent: '#0366d6',
+  };
+  
+  export const darkTheme = {
+    background: '#1a1a1a',
+    text: '#fff',
+    accent: '#61dafb',
+  };
 
 export const ToggleButton = styled.button`
   background-color: ${({ theme }) => theme.accent};
