@@ -32,6 +32,11 @@ const RepoList = ({ repos }) => {
     aggregateLanguageStats();
   }, [repos]);
 
+  // Function to sort language stats numerically
+  const sortLanguages = (stats) => {
+    return Object.entries(stats).sort(([, a], [, b]) => b - a);
+  };
+
   return (
     <RepoListContainer>
       <h2>Repositories:</h2>
@@ -51,7 +56,7 @@ const RepoList = ({ repos }) => {
         <LanguageStats>
           <p>Languages used:</p>
           <ul>
-            {Object.entries(languageStats).map(([language, bytes]) => (
+            {sortLanguages(languageStats).map(([language, bytes]) => (
               <li key={language}>
                 {language}: {bytes} bytes
               </li>
