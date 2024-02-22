@@ -1,6 +1,6 @@
 // src/RepoList.js
-import React, { useState, useEffect } from 'react';
-import { RepoListContainer, LanguageStats } from './StyledComponents';
+import React, { useState, useEffect } from "react";
+import { RepoListContainer, LanguageStats } from "./StyledComponents";
 
 const RepoList = ({ repos }) => {
   const [languageStats, setLanguageStats] = useState({});
@@ -19,13 +19,14 @@ const RepoList = ({ repos }) => {
 
           const languageData = await response.json();
           for (const [language, bytes] of Object.entries(languageData)) {
-            aggregatedStats[language] = (aggregatedStats[language] || 0) + bytes;
+            aggregatedStats[language] =
+              (aggregatedStats[language] || 0) + bytes;
           }
         }
 
         setLanguageStats(aggregatedStats);
       } catch (error) {
-        console.error('Error fetching language stats:', error);
+        console.error("Error fetching language stats:", error);
       }
     };
 
@@ -47,7 +48,9 @@ const RepoList = ({ repos }) => {
               <strong>{repo.name}</strong>
             </a>
             <p>{repo.description}</p>
-            <p>Last updated: {new Date(repo.updated_at).toLocaleDateString()}</p>
+            <p>
+              Last updated: {new Date(repo.updated_at).toLocaleDateString()}
+            </p>
           </li>
         ))}
       </ul>
