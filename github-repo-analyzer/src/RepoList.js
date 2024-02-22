@@ -6,14 +6,30 @@ const RepoList = ({ repos }) => {
   const [languageStats, setLanguageStats] = useState({});
 
   useEffect(() => {
-    // Fetch language statistics for the first repository (assuming all repositories have similar languages)
-    if (repos.length > 0) {
-      const repo = repos[0];
-      fetch(repo.languages_url)
-        .then((response) => response.json())
-        .then((data) => setLanguageStats(data))
-        .catch((error) => console.error('Error fetching language stats:', error));
-    }
+    // Fetch and aggregate language statistics for all repositories
+    const aggregateLanguageStats = async () => {
+      try {
+        const aggregatedStats = {};
+
+        for (const repo of repos) {
+          const response = await fetch(repo.languages_url);
+          if (!response.ok) {
+            throw new Error(`Failed to fetch language stats for ${repo.name}`);
+          }
+
+          const languageData = await response.json();
+          for (const [language, bytes] of Object.entries(languageData)) {
+            aggregatedStats[language] = (aggregatedStats[language] || 0) + bytes;
+          }
+        }
+
+        setLanguageStats(aggregatedStats);
+      } catch (error) {
+        console.error('Error fetching language stats:', error);
+      }
+    };
+
+    aggregateLanguageStats();
   }, [repos]);
 
   return (
@@ -27,22 +43,22 @@ const RepoList = ({ repos }) => {
             </a>
             <p>{repo.description}</p>
             <p>Last updated: {new Date(repo.updated_at).toLocaleDateString()}</p>
-
-            {languageStats && (
-              <LanguageStats>
-                <p>Languages used:</p>
-                <ul>
-                  {Object.entries(languageStats).map(([language, bytes]) => (
-                    <li key={language}>
-                      {language}: {bytes} bytes
-                    </li>
-                  ))}
-                </ul>
-              </LanguageStats>
-            )}
           </li>
         ))}
       </ul>
+
+      {languageStats && Object.keys(languageStats).length > 0 && (
+        <LanguageStats>
+          <p>Languages used:</p>
+          <ul>
+            {Object.entries(languageStats).map(([language, bytes]) => (
+              <li key={language}>
+                {language}: {bytes} bytes
+              </li>
+            ))}
+          </ul>
+        </LanguageStats>
+      )}
     </RepoListContainer>
   );
 };
