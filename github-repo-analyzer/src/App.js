@@ -44,6 +44,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+      <GlobalStyle />
       <AppContainer>
         <h1>GitHub Repository Analyzer</h1>
         <RepoSearch onSearch={handleSearch} />
