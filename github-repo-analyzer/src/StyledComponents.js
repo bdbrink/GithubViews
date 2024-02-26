@@ -124,6 +124,27 @@ export const lightTheme = {
     accent: '#61dafb',
   };
 
+  export const GlobalStyle = createGlobalStyle`
+  html {
+    background-color: ${({ theme }) => theme.background};
+    color: ${({ theme }) => theme.text};
+  }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+`;
+
 export const ToggleButton = styled.button`
   background-color: ${({ theme }) => theme.accent};
   color: #fff;
