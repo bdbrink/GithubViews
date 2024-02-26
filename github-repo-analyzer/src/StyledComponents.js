@@ -1,5 +1,5 @@
 // src/StyledComponents.js
-import styled, { keyframes, css } from 'styled-components';
+import styled, { keyframes, css, createGlobalStyle } from 'styled-components';
 
 export const AppContainer = styled.div`
   max-width: 800px;
