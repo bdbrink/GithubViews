@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { AppContainer, ErrorMessage, LoadingIndicator, ToggleButton } from './StyledComponents';
 import RepoSearch from './RepoSearch';
 import RepoList from './RepoList';
-import { lightTheme, darkTheme } from './StyledComponents';
+import { lightTheme, darkTheme, GlobalStyle } from './StyledComponents';
 
 const App = () => {
   const [userProfile, setUserProfile] = useState(null);
