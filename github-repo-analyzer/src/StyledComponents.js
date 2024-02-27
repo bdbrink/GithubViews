@@ -154,10 +154,12 @@ export const ToggleButton = styled.button`
   margin-bottom: 20px;
 `;
 
+
 export const LanguageStats = styled.div`
   margin-top: 10px;
   padding: 10px;
-  background-color: #f6f8fa;
+  background-color: ${({ theme }) => theme.background}; /* Set background color */
+  color: ${({ theme }) => theme.text}; /* Set text color */
   border-radius: 5px;
 
   p {
