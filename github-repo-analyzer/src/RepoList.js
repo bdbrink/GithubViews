@@ -1,9 +1,11 @@
 // src/RepoList.js
-import React, { useState, useEffect } from "react";
-import { RepoListContainer, LanguageStats } from "./StyledComponents";
+import React, { useState, useEffect } from 'react';
+import { RepoListContainer, LanguageStats } from './StyledComponents';
 
 const RepoList = ({ repos }) => {
   const [languageStats, setLanguageStats] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const reposPerPage = 5; // Number of repositories to display per page
 
   useEffect(() => {
     // Fetch and aggregate language statistics for all repositories
@@ -19,14 +21,13 @@ const RepoList = ({ repos }) => {
 
           const languageData = await response.json();
           for (const [language, bytes] of Object.entries(languageData)) {
-            aggregatedStats[language] =
-              (aggregatedStats[language] || 0) + bytes;
+            aggregatedStats[language] = (aggregatedStats[language] || 0) + bytes;
           }
         }
 
         setLanguageStats(aggregatedStats);
       } catch (error) {
-        console.error("Error fetching language stats:", error);
+        console.error('Error fetching language stats:', error);
       }
     };
 
@@ -38,19 +39,24 @@ const RepoList = ({ repos }) => {
     return Object.entries(stats).sort(([, a], [, b]) => b - a);
   };
 
+  // Pagination logic
+  const indexOfLastRepo = currentPage * reposPerPage;
+  const indexOfFirstRepo = indexOfLastRepo - reposPerPage;
+  const currentRepos = repos.slice(indexOfFirstRepo, indexOfLastRepo);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <RepoListContainer>
       <h2>Repositories:</h2>
       <ul>
-        {repos.map((repo) => (
+        {currentRepos.map((repo) => (
           <li key={repo.id}>
             <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
               <strong>{repo.name}</strong>
             </a>
             <p>{repo.description}</p>
-            <p>
-              Last updated: {new Date(repo.updated_at).toLocaleDateString()}
-            </p>
+            <p>Last updated: {new Date(repo.updated_at).toLocaleDateString()}</p>
           </li>
         ))}
       </ul>
@@ -67,6 +73,15 @@ const RepoList = ({ repos }) => {
           </ul>
         </LanguageStats>
       )}
+
+      {/* Pagination buttons */}
+      <div>
+        {Array.from({ length: Math.ceil(repos.length / reposPerPage) }, (_, index) => (
+          <button key={index + 1} onClick={() => paginate(index + 1)}>
+            {index + 1}
+          </button>
+        ))}
+      </div>
     </RepoListContainer>
   );
 };
