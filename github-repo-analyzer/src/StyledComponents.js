@@ -29,33 +29,36 @@ export const Button = styled.button`
 
 export const RepoListContainer = styled.div`
   margin-top: 20px;
-  text-align: left;
-
-  h2 {
-    margin-bottom: 10px;
-  }
 
   ul {
     list-style: none;
     padding: 0;
 
     li {
-      margin-bottom: 20px;
+      border: 1px solid ${({ theme }) => theme.accent};
+      border-radius: 5px;
+      margin-bottom: 10px;
+      padding: 10px;
+    }
 
-      a {
-        text-decoration: none;
-        color: #0366d6;
-        font-weight: bold;
+    a {
+      color: ${({ theme }) => theme.accent};
+      text-decoration: none;
+    }
+  }
 
-        &:hover {
-          text-decoration: underline;
-        }
-      }
+  div {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 
-      p {
-        margin-top: 5px;
-        color: #586069;
-      }
+    button {
+      background-color: ${({ theme }) => theme.accent};
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      cursor: pointer;
+      margin: 0 5px;
     }
   }
 `;
